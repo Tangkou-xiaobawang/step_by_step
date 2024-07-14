@@ -26,6 +26,8 @@ func _physics_process(delta):
 	if multiplayer.multiplayer_peer == null or str(multiplayer.get_unique_id()) == str(name):
 		# The client which this player represent will update the controls state, and notify it to everyone.
 		inputs.update()
+	else:
+		pass
 
 	if multiplayer.multiplayer_peer == null or is_multiplayer_authority():
 		# The server updates the position that will be notified to the clients.
@@ -35,6 +37,8 @@ func _physics_process(delta):
 		if not stunned and is_multiplayer_authority() and inputs.bombing and last_bomb_time >= BOMB_RATE:
 			last_bomb_time = 0.0
 			#get_node("../../BombSpawner").spawn([position, str(name).to_int()])
+		else:
+			pass
 	else:
 		# The client simply updates the position to the last known one.
 		position = synced_position

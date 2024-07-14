@@ -1,13 +1,21 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
 config_version=5
 
 [application]
 
-config/name="bjq_lianji20240709"
+config/name="20240709"
 config/description="A multiplayer implementation of the classic bomberman game.
 One of the players should press \"Host\", while the other
 should type in his address and press \"Play\"."
 config/tags=PackedStringArray("2d", "demo", "network", "official")
-run/main_scene="res://lobby.tscn"
+run/main_scene="res://ui/lobby.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://0.png"
 

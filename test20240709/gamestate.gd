@@ -77,7 +77,7 @@ func unregister_player(id):
 @rpc("call_local")
 func load_world():
 	# Change scene.
-	var world = load("res://world.tscn").instantiate()
+	var world = load("res://game/world.tscn").instantiate()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").hide()
 
@@ -144,6 +144,9 @@ func end_game():
 	players.clear()
 	if multiplayer.is_server():
 		multiplayer.multiplayer_peer.close()
+	else:
+		multiplayer.multiplayer_peer=null
+		pass
 
 
 
