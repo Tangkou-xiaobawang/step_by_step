@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dviwgv2ty8v6u"]
+
+[ext_resource type="Script" path="res://player.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d4xmlso7k7ve" path="res://0.png" id="2_rctdt"]
+[ext_resource type="FontFile" uid="uid://knb8u535cfkw" path="res://ui/montserrat.otf" id="3"]
+[ext_resource type="Script" path="res://player_controls.gd" id="4_k1vfr"]
+
+[sub_resource type="CircleShape2D" id="1"]
+radius = 20.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_5huhx"]
+outline_size = 8
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_sh64w"]
+properties/0/path = NodePath(".:synced_position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath("label:text")
+properties/1/spawn = true
+properties/1/replication_mode = 0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_w53uu"]
+properties/0/path = NodePath(".:motion")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:bombing")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+
+[node name="player" type="CharacterBody2D"]
+z_index = 10
+motion_mode = 1
+script = ExtResource("1")
+
+[node name="sprite" type="Sprite2D" parent="."]
+rotation = -6.28319
+texture = ExtResource("2_rctdt")
+
+[node name="shape" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
+
+[node name="label" type="Label" parent="."]
+offset_left = -82.0
+offset_top = -35.0
+offset_right = 85.0
+offset_bottom = -14.0
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 16
+text = "Player 1"
+label_settings = SubResource("LabelSettings_5huhx")
+horizontal_alignment = 1
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_sh64w")
+
+[node name="Inputs" type="Node" parent="."]
+script = ExtResource("4_k1vfr")
+
+[node name="InputsSync" type="MultiplayerSynchronizer" parent="Inputs"]
+replication_config = SubResource("SceneReplicationConfig_w53uu")
